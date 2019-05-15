@@ -37,7 +37,7 @@ const AgregarCita = (props)=>{
         }else{
             setError(true);
         }
-        e.currentTarget.reset();
+        // e.currentTarget.reset();
     }
 
     return(

@@ -6,41 +6,25 @@ import ListaCita from './ListaCita';
 
 function App() {
 
-  const [cita, setCitas] = useState([]);
-
+  const citasLS = localStorage.getItem('cita');
+  const pCitas = citasLS ? JSON.parse(citasLS) : [];
+  const [citas, setCitas] = useState(pCitas);
+  console.log(citasLS, pCitas, citas);
   useEffect(()=>{
-
-    const citasLS = localStorage.getItem('cita');
-    console.log(citasLS);
-    // if(citasLS){
-    //   setCitas({
-    //     cita: JSON.parse(citasLS)
-    //   });
-    // }
-
-    localStorage.setItem(
-      'cita',
-      JSON.stringify(cita)
-    )
-  })
+      console.log(citas);
+      localStorage.setItem(
+        'cita',
+        JSON.stringify(citas))
+      
+  }, [citas])
 
   const crearCita = (nuevaCita) => {
-    const citas = [...cita, nuevaCita];
-
-    console.log(citas);
-
-    setCitas(citas);
+    setCitas([...citas, nuevaCita]);
   }
 
   const eliminarCita = id => {
-    // obtener copia del estado
-    const citasActuales = [...cita];
-
-    //borrar elemento del estado
-    const citas = citasActuales.filter(cita => cita.id !== id);
-
     //Actualizar el estado
-    setCitas(citas);
+    setCitas(citas.filter(cita => cita.id !== id));
   }
 
   return (
@@ -56,7 +40,7 @@ function App() {
         </div>
         <div className="col-md-6">
           <ListaCita 
-            cita = {cita}
+            cita = {citas}
             eliminarCita = {eliminarCita}
           />
         </div>
