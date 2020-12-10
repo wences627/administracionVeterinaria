@@ -9,9 +9,7 @@ function App() {
   const citasLS = localStorage.getItem('cita');
   const pCitas = citasLS ? JSON.parse(citasLS) : [];
   const [citas, setCitas] = useState(pCitas);
-  console.log(citasLS, pCitas, citas);
   useEffect(()=>{
-      console.log(citas);
       localStorage.setItem(
         'cita',
         JSON.stringify(citas))

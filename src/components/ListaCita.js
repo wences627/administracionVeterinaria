@@ -14,12 +14,12 @@ const ListaCita = (props) => {
                 <h2 className="card-title text-center">
                     {mensaje}
                 </h2>
-                <div className="lista-citas">
+                <div className="lista-citas d-flex flex-wrap">
                     {Object.keys(props.cita).map(citas => (
                         <Cita 
                             key = {citas}
                             info = {props.cita[citas]}
-                            eliminarCita = {props.eliminarCita}
+                            eliminarCita={props.eliminarCita}
                         />
                     ))}
                 </div>

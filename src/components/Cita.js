@@ -9,8 +9,8 @@ function Cita(props){
 
 
     return(
-        <div className="media mt-3">
-            <div className="media-body text-center">
+        <div className="media mt-3 col-md-6 d-block" >
+            <div className="media-body">
                 <h3 className="mt-0"> {mascota} </h3>
                 <p className="card-text"><span>Nombre del Dueño: </span> {propietario} </p>
                 <p className="card-text"><span>Fecha: </span> {fecha} </p>

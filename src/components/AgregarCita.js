@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import uuid from 'uuid';
+import { v4 as uuidv4 }from 'uuid';
 
 const AgregarCita = (props)=>{
 
@@ -25,7 +25,7 @@ const AgregarCita = (props)=>{
         
         if(mascota && propietario && fecha && hora && sintomas){
             const nuevaCita = {
-                id: uuid(),
+                id: uuidv4(),
                 mascota,
                 propietario,
                 fecha,
@@ -34,10 +34,10 @@ const AgregarCita = (props)=>{
             }
             props.crearCita(nuevaCita);
             setError(false);
+            e.currentTarget.reset();
         }else{
             setError(true);
         }
-        // e.currentTarget.reset();
     }
 
     return(
@@ -52,32 +52,34 @@ const AgregarCita = (props)=>{
                     <div className="form-group row">
                         <label className="col-sm-4 col-lg-2 col-form-label">Nombre Mascota</label>
                         <div className="col-sm-8 col-lg-10">
-                            <input type="text" ref={nombreMascotaRef} className="form-control" placeholder="Nombre Mascota" />
+                            <input type="text" ref={nombreMascotaRef} className="form-control" placeholder="Nombre Mascota" required />
                         </div>
                     </div>
                     <div className="form-group row">
                         <label className="col-sm-4 col-lg-2 col-form-label">Nombre Dueño</label>
                         <div className="col-sm-8 col-lg-10">
-                            <input type="text" ref={propietarioRef} className="form-control"  placeholder="Nombre Dueño de la Mascota" />
+                            <input type="text" ref={propietarioRef} className="form-control"  placeholder="Nombre Dueño de la Mascota" required />
                         </div>
                     </div>
 
                     <div className="form-group row">
-                        <label className="col-sm-4 col-lg-2 col-form-label">Fecha</label>
-                        <div className="col-sm-8 col-lg-4  mb-4 mb-lg-0">
-                            <input type="date" ref={fechaRef} className="form-control" />
+                        <label className="col-lg-2 col-form-label">Fecha</label>
+                        <div className="col-lg-5  mb-4 mb-lg-0 mr-3">
+                            <input type="date" ref={fechaRef} className="form-control" required />
                         </div>                            
 
-                        <label className="col-sm-4 col-lg-2 col-form-label">Hora</label>
-                        <div className="col-sm-8 col-lg-4">
-                            <input type="time" ref={horaRef} className="form-control" />
-                        </div>
+                        {/* <label className=" col-lg-2 col-form-label">Hora</label>
+                        <div className=" col-lg-4">
+                            <input type="time" ref={horaRef} className="form-control" value='08:00:00'/>
+                        </div> */}
+                        <label htmlFor="appt-time" className="col-form-label mr-4">Hora </label>
+                        <input id="appt-time" ref={horaRef} type="time" name="appt-time" step="2" defaultValue="08:00:00" min="08:00:00" max="18:00:00" required></input>
                     </div>
 
                     <div className="form-group row">
                         <label className="col-sm-4 col-lg-2 col-form-label">Sintomas</label>
                         <div className="col-sm-8 col-lg-10">
-                            <textarea ref={sintomasRef} className="form-control"></textarea>
+                            <textarea ref={sintomasRef} className="form-control" required />
                         </div>
                     </div>
                     <div className="form-group row justify-content-end">
